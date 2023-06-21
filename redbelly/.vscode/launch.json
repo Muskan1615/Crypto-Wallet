@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "redbelly",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "redbelly (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "redbelly (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Android",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+			"name": "Chrome",
+            "cwd": "redbelly",
+			"request": "launch",
+			"type": "dart",
+            "deviceId": "chrome"
+		},
+		{
+			"name": "Android",
+            "cwd": "redbelly",
+			"request": "launch",
+			"type": "dart",
+			"deviceId": "2201116SI"
+		},
+    ],
+    "compounds": [
+		{
+			"name": "All Devices",
+			"configurations": ["Android", "Chrome"],
+		}
+	]
+}
