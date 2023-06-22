@@ -86,8 +86,14 @@ flutter:
         - asset: fonts/AvenirNextLT/AvenirNextLTPro-Regular.otf
     - family: Archivo
       fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
+        - asset: fonts/Archivo/Archivo-Thin.ttf
+        - asset: fonts/Archivo/Archivo-ExtraLight.ttf
+        - asset: fonts/Archivo/Archivo-Light.ttf
+        - asset: fonts/Archivo/Archivo-Regular.ttf
+        - asset: fonts/Archivo/Archivo-Medium.ttf
+        - asset: fonts/Archivo/Archivo-SemiBold.ttf
+        - asset: fonts/Archivo/Archivo-Bold.ttf
+        - asset: fonts/Archivo/Archivo-ExtraBold.ttf
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,
