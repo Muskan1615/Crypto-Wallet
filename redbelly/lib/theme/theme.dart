@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 final ThemeData theme = ThemeData(
-  scaffoldBackgroundColor: const Color.fromRGBO(8, 10, 12, 1),
+  scaffoldBackgroundColor: const Color.fromRGBO(8, 10, 12, 1),  
   textTheme: const TextTheme(
     titleLarge: TextStyle(
       fontFamily: 'AvenirNextLT',
