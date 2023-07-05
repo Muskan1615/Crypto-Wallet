@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
+import '../theme/checkbox.dart';
+import '../theme/button.dart';
+import '../theme/color_coding.dart';
+import '../theme/color.dart';
+import '../theme/typography.dart';
+import 'app_bar.dart';
 
 final ThemeData theme = ThemeData(
-  scaffoldBackgroundColor: const Color.fromRGBO(8, 10, 12, 1),  
-  textTheme: const TextTheme(
-    titleLarge: TextStyle(
-      fontFamily: 'AvenirNextLT',
-      fontSize: 74,
-      fontWeight: FontWeight.w600,
-      color: Colors.white,
-    ),
-    titleMedium: TextStyle(
-      fontFamily: 'Archivo',
-      fontSize: 40,
-      fontWeight: FontWeight.w400,
-      color: Colors.white,
-    ),
-    titleSmall: TextStyle(
-      fontFamily: 'Archivo',
-      fontSize: 18,
-      fontWeight: FontWeight.w600,
-      color: Colors.white,
-    ),
-  ),
+  scaffoldBackgroundColor: surfaceSwatch[24],
+  appBarTheme: appBarTheme(textTheme),
+  textTheme: textTheme,
+  colorScheme: colorScheme,
+  elevatedButtonTheme: elevatedButtonTheme(),
+  checkboxTheme: checkboxTheme,
 );

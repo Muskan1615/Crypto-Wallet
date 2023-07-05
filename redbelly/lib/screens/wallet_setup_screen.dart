@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:redbelly/components/slider_sub_screen.dart';
-import 'package:redbelly/utilities/custom_gradient_button.dart';
-import '../utilities/custom_button.dart';
-import '../utilities/custom_shader.dart';
+import '../screens/import_from_seed_screen.dart';
+import '../theme/color_coding.dart';
+import '../theme/gradient.dart';
 
 class WalletSetupScreen extends StatelessWidget {
   const WalletSetupScreen({super.key});
@@ -16,7 +15,7 @@ class WalletSetupScreen extends StatelessWidget {
             height: 150,
           ),
           Expanded(
-            flex: 2,
+            flex: 5,
             child: Align(
               alignment: Alignment.center,
               child: SizedBox(
@@ -36,7 +35,9 @@ class WalletSetupScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Wallet Setup',
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                          fontSize: 40,
+                        ),
                   ),
                 ],
               ),
@@ -44,29 +45,70 @@ class WalletSetupScreen extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.only(
-              bottom: 16,
+              bottom: 66,
               left: 24,
               right: 24,
             ),
-            child: CustomButton(
-              backgroundColor: const Color.fromRGBO(32, 40, 50, 1),
-              height: 56,
-              onPressed: () {},
-              text: 'Import Using Seed Phase',
-              width: 327,
-            ),
-          ),
-          Container(
-              padding: const EdgeInsets.only(
-                bottom: 66,
-                left: 24,
-                right: 24,
-              ),
-              child: CustomGradientButton(
-                  text: 'Create a New Wallet',
-                  width: 327,
+            child: Column(
+              children: [
+                ElevatedButton(
+                  style: ButtonStyle(
+                    fixedSize: const MaterialStatePropertyAll(
+                      Size(500, 56),
+                    ),
+                    backgroundColor:
+                        MaterialStatePropertyAll(surfaceSwatch[21]),
+                  ),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return const ImportFromSeedScreen();
+                        },
+                      ),
+                    );
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: const Text('Import Using Seed Phrase'),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Container(
+                  width: 500,
                   height: 56,
-                  onPressed: () {})),
+                  decoration: BoxDecoration(
+                    gradient: Gradients.gradient2,
+                    borderRadius: BorderRadius.circular(80),
+                  ),
+                  child: ElevatedButton(
+                    style: const ButtonStyle(
+                      fixedSize: MaterialStatePropertyAll(
+                        Size(500, 56),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return const WalletSetupScreen();
+                          },
+                        ),
+                      );
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: const Text('Create a New Wallet'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
