@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import '../theme/color_coding.dart';
+import '../theme/gradient.dart';
 import '/screens/wallet_setup_screen.dart';
-import '/utilities/custom_button.dart';
-import '../components/slider_sub_screen.dart';
-import '../utilities/custom_shader.dart';
+import '../widgets/slider_sub_screen.dart';
 
 class SliderScreen extends StatefulWidget {
   const SliderScreen({super.key});
@@ -30,7 +30,7 @@ class _SliderScreenState extends State<SliderScreen> {
               },
               children: const [
                 SliderSubScreen(
-                  shader: customShader,
+                  shader: Gradients.customShader,
                   image: 'images/slider-1.png',
                   width: 214,
                   height: 220,
@@ -38,7 +38,7 @@ class _SliderScreenState extends State<SliderScreen> {
                   subtitle: 'Diversity',
                 ),
                 SliderSubScreen(
-                  shader: customShader,
+                  shader: Gradients.customShader,
                   image: 'images/slider-2.png',
                   width: 295,
                   height: 295,
@@ -46,7 +46,7 @@ class _SliderScreenState extends State<SliderScreen> {
                   subtitle: 'Security',
                 ),
                 SliderSubScreen(
-                  shader: customShader,
+                  shader: Gradients.customShader,
                   image: 'images/slider-3.png',
                   width: 185,
                   height: 220,
@@ -68,21 +68,30 @@ class _SliderScreenState extends State<SliderScreen> {
             ),
           ),
           Container(
-            padding:
-                const EdgeInsets.only(bottom: 42, top: 8, left: 24, right: 24),
-            child: CustomButton(
-              text: 'Get Start',
+            padding: const EdgeInsets.only(
+              bottom: 42,
+              top: 8,
+              left: 24,
+              right: 24,
+            ),
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(surfaceSwatch[21]),
+              ),
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (BuildContext context) {
-                    return const WalletSetupScreen();
-                  }),
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const WalletSetupScreen();
+                    },
+                  ),
                 );
               },
-              backgroundColor: const Color.fromRGBO(32, 40, 50, 1),
-              height: 48,
-              width: 327,
+              child: Container(
+                alignment: Alignment.center,
+                child: const Text('Get Start'),
+              ),
             ),
           ),
         ],
@@ -97,7 +106,7 @@ class _SliderScreenState extends State<SliderScreen> {
       height: pageIndex == _currentPage ? 8 : 8,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: pageIndex == _currentPage ? Colors.blue : Colors.grey,
+        color: pageIndex == _currentPage ? primarySwatch[5] : surfaceSwatch[18],
       ),
     );
   }
