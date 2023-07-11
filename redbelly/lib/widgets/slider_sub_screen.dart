@@ -21,28 +21,29 @@ class SliderSubScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 150,
-        ),
-        Expanded(
-          flex: 3,
-          child: Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: width,
-              height: height,
-              child: Image.asset(
-                image,
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 150,
+          ),
+          Expanded(
+            flex: 3,
+            child: Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: width,
+                height: height,
+                child: Image.asset(
+                  image,
+                ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Container(
+          Container(
+            padding: const EdgeInsets.only(bottom:72),
             alignment: Alignment.topCenter,
             child: Column(
               children: [
@@ -96,8 +97,8 @@ class SliderSubScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

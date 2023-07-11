@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import '../theme/checkbox.dart';
-import '../theme/button.dart';
+import 'input_decoration_theme.dart';
+import 'checkbox_theme.dart';
+import 'button_theme.dart';
 import '../theme/color_coding.dart';
-import '../theme/color.dart';
+import 'color_scheme.dart';
 import '../theme/typography.dart';
-import 'app_bar.dart';
+import 'app_bar_theme.dart';
+import 'icon_theme.dart';
 
 final ThemeData theme = ThemeData(
   scaffoldBackgroundColor: surfaceSwatch[24],
@@ -13,4 +15,7 @@ final ThemeData theme = ThemeData(
   colorScheme: colorScheme,
   elevatedButtonTheme: elevatedButtonTheme(),
   checkboxTheme: checkboxTheme,
+  inputDecorationTheme: inputDecorationTheme(),
+  iconTheme: iconThemeData(),
+  iconButtonTheme: iconButtonThemeData(),
 );

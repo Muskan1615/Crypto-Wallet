@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:redbelly/theme/color_coding.dart';
+import '../theme/color_coding.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -12,6 +12,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final LocalAuthentication _localAuthentication = LocalAuthentication();
   bool _isFingerprintEnabled = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,27 +28,9 @@ class _SignInState extends State<SignIn> {
           const Spacer(),
           ToggleButtons(
             renderBorder: false,
-            isSelected: [_isFingerprintEnabled],
-            onPressed: (index) async {
-              if (_isFingerprintEnabled) {
-                setState(() {
-                  _isFingerprintEnabled = false;
-                });
-              } else {
-                try {
-                  bool authenticated = await _localAuthentication.authenticate(
-                    localizedReason: 'Authenticate with fingerprint',
-                    options: const AuthenticationOptions(biometricOnly: true),
-                  );
-                  if (authenticated) {
-                    setState(() {
-                      _isFingerprintEnabled = true;
-                    });
-                  }
-                } catch (e) {
-                  print('Error authenticating with fingerprint: $e');
-                }
-              }
+            isSelected: const [false],
+            onPressed: (int index) {
+              setState(() {});
             },
             children: [
               Icon(
