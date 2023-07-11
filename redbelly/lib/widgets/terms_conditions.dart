@@ -13,10 +13,11 @@ class TermsConditions extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: 'By proceeding, you agree to these ',
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(fontSize: 18, color: surfaceSwatch[9]),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontSize: 18,
+                color: surfaceSwatch[9],
+                height: 1.5,
+              ),
           children: [
             TextSpan(
               text: 'Terms and Conditions.',

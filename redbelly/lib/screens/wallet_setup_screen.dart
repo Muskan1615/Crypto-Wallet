@@ -60,7 +60,7 @@ class WalletSetupScreen extends StatelessWidget {
                         MaterialStatePropertyAll(surfaceSwatch[21]),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
@@ -91,7 +91,7 @@ class WalletSetupScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (BuildContext context) {
