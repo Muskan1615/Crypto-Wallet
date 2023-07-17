@@ -38,6 +38,7 @@ class SliderSubScreen extends StatelessWidget {
                 height: height,
                 child: Image.asset(
                   image,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
