@@ -37,7 +37,7 @@ class InputField extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 15,bottom: 15),
+          padding: const EdgeInsets.only(top: 12,bottom: 12),
           decoration: BoxDecoration(
             border: Border.all(
               color: surfaceSwatch[22]!,
@@ -52,14 +52,12 @@ class InputField extends StatelessWidget {
               labelStyle: inputDecorationTheme().labelStyle,
               hintText: decoration?.hintText,
               hintStyle: inputDecorationTheme().hintStyle,
-              helperText: decoration?.helperText != null ? "" : null,
-              helperStyle: inputDecorationTheme().helperStyle,
-              errorStyle: const TextStyle(height: 1, fontSize: 1),
-              errorText: decoration?.errorText != null ? "" : null,
+              helperText: decoration?.helperText != null ? null : null,
+              errorText: decoration?.errorText != null ? null : null,
               suffixIcon: decoration?.suffixIcon,
               suffixIconColor: inputDecorationTheme().suffixIconColor,
               border: inputDecorationTheme().border,
-              constraints: maxLines != null ? inputDecorationTheme().constraints : const BoxConstraints(),
+              constraints: maxLines != null ? inputDecorationTheme().constraints : const BoxConstraints(maxHeight: double.infinity),
             ),
             obscureText: obscureText,
             obscuringCharacter: '*',

@@ -20,7 +20,7 @@ InputDecorationTheme inputDecorationTheme() {
     suffixIconColor: primarySwatch,
     border: InputBorder.none,
     constraints: const BoxConstraints(
-      maxHeight: 34,
+      maxHeight: 40,
     ),
   );
 }
