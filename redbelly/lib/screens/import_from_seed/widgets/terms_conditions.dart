@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:redbelly/theme/color_coding.dart';
+import '../../../theme/color_coding.dart';
 
 class TermsConditions extends StatelessWidget {
   const TermsConditions({super.key});

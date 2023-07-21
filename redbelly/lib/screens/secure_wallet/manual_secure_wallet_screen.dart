@@ -1,17 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:redbelly/screens/secure_wallet/tap_view_seed_phrase_screen.dart';
+import '/screens/secure_wallet/tap_view_seed_phrase_screen.dart';
 import '/screens/secure_wallet/protect_your_wallet_screen.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
 import '../../theme/typography.dart';
 
 class ManualSecureWalletScreen extends StatefulWidget {
-  late final bool? showProtectYourWalletPage;
+  final bool? showProtectYourWalletPage;
 
-  // ignore: prefer_const_constructors_in_immutables
-  ManualSecureWalletScreen({
+  const ManualSecureWalletScreen({
     Key? key,
     this.showProtectYourWalletPage,
   }) : super(key: key);
@@ -37,12 +36,13 @@ class _ManualSecureWalletScreenState extends State<ManualSecureWalletScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:
-            widget.showProtectYourWalletPage! ? const Color(0x99222531) : null,
+        backgroundColor: widget.showProtectYourWalletPage == true
+            ? const Color(0x99222531)
+            : null,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: widget.showProtectYourWalletPage!
+            color: widget.showProtectYourWalletPage == true
                 ? const Color(0x99222531)
                 : null,
           ),
@@ -95,20 +95,19 @@ class _ManualSecureWalletScreenState extends State<ManualSecureWalletScreen> {
                     text: TextSpan(
                       text: "Secure your wallet's ",
                       style: textTheme.bodyMedium!.copyWith(
-                            color: surfaceSwatch[9],
-                            fontSize: 18,
-                            height: 1.5,
-                            wordSpacing: 2,
-                          ),
+                        color: surfaceSwatch[9],
+                        fontSize: 18,
+                        height: 1.5,
+                        wordSpacing: 2,
+                      ),
                       children: [
                         TextSpan(
                           text: '"Seed Phrase"',
-                          style:
-                              textTheme.bodyMedium!.copyWith(
-                                    fontSize: 18,
-                                    color: secondarySwatch[5],
-                                    wordSpacing: 2,
-                                  ),
+                          style: textTheme.bodyMedium!.copyWith(
+                            fontSize: 18,
+                            color: secondarySwatch[5],
+                            wordSpacing: 2,
+                          ),
                           recognizer: TapGestureRecognizer()..onTap = () {},
                         ),
                       ],
@@ -298,36 +297,26 @@ class _ManualSecureWalletScreenState extends State<ManualSecureWalletScreen> {
               ],
             ),
           ),
-          if (widget.showProtectYourWalletPage!)
-            WillPopScope(
-              onWillPop: () async {
-                setState(() {
-                  widget.showProtectYourWalletPage = false;
-                });
-                return false;
-              },
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-                child: Stack(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          widget.showProtectYourWalletPage = false;
-                        });
-                      },
-                      child: const Stack(
-                        children: [
-                          ModalBarrier(
-                            color: Color(0x99222531),
-                            dismissible: true,
-                          ),
-                        ],
-                      ),
+          if (widget.showProtectYourWalletPage == true)
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+              child: Stack(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Stack(
+                      children: [
+                        ModalBarrier(
+                          color: Color(0x99222531),
+                          dismissible: false,
+                        ),
+                      ],
                     ),
-                    const ProtectYourWalletScreen(),
-                  ],
-                ),
+                  ),
+                  const ProtectYourWalletScreen(),
+                ],
               ),
             ),
         ],

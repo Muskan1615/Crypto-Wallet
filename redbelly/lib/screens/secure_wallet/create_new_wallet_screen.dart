@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../theme/color_coding.dart';
-import '../widgets/input_field.dart';
-import '../widgets/sign_in.dart';
-import '../theme/gradient.dart';
-import '../theme/typography.dart';
-import 'secure_wallet/create_secure_wallet_screen.dart';
+import '../../theme/color_coding.dart';
+import '../../widgets/input_field.dart';
+import '../import_from_seed/widgets/sign_in.dart';
+import '../../theme/gradient.dart';
+import '../../theme/typography.dart';
+import 'create_secure_wallet_screen.dart';
 
 class CreateNewWalletScreen extends StatefulWidget {
   const CreateNewWalletScreen({super.key});
@@ -16,20 +16,70 @@ class CreateNewWalletScreen extends StatefulWidget {
 
 class _CreateNewWalletScreenState extends State<CreateNewWalletScreen> {
   final TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool isChecked = false;
   bool _isButtonDisabled = true;
+  bool viewNewPassword = false;
+  bool viewConfirmPassword = false;
+  String? _newPassword;
+
+  bool validateStructure(String value) {
+    String pattern = r'^[A-Za-z0-9!@#\$&*~]{8,}$';
+    RegExp regExp = RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
+
+  validate() {
+    if (_newPasswordController.text.isEmpty) {
+      setState(() {
+        _newPassword = null;
+      });
+      return;
+    }
+
+    if (_newPasswordController.text.length < 8) {
+      setState(() {
+        _newPassword = 'Password should be at least 8 characters';
+      });
+      return;
+    }
+
+    if (!validateStructure(_newPasswordController.text)) {
+      setState(() {
+        _newPassword = 'Password Strength: Weak';
+      });
+    } else {
+      if (_newPasswordController.text.contains(RegExp(r'[A-Z]')) &&
+          _newPasswordController.text.contains(RegExp(r'[a-z]')) &&
+          _newPasswordController.text.contains(RegExp(r'[0-9]')) &&
+          _newPasswordController.text.contains(RegExp(r'[!@#\$&*~]'))) {
+        setState(() {
+          _newPassword = 'Password Strength: Strong';
+        });
+      } else {
+        setState(() {
+          _newPassword = 'Password Strength: Good';
+        });
+      }
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     _newPasswordController.addListener(_validateFields);
+    _confirmPasswordController.addListener(_validateFields);
   }
 
   void _validateFields() {
     final newPassword = _newPasswordController.text;
+    final confirmPassword = _confirmPasswordController.text;
 
     setState(() {
-      _isButtonDisabled = newPassword.isEmpty;
+      _isButtonDisabled = newPassword.isEmpty ||
+          confirmPassword.isEmpty ||newPassword.length<8||
+          newPassword != confirmPassword;
     });
   }
 
@@ -85,13 +135,24 @@ class _CreateNewWalletScreenState extends State<CreateNewWalletScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: InputField(
                 controller: _newPasswordController,
-                decoration: const InputDecoration(
+                validator: validate(),
+                onChanged: validate(),
+                decoration: InputDecoration(
                   labelText: 'New Password',
                   hintText: '',
-                  suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                  helperText: 'Password Strength: Good',
+                  suffixIcon: IconButton(
+                    icon: Icon(viewNewPassword
+                        ? Icons.remove_red_eye_outlined
+                        : Icons.visibility_off_outlined),
+                    onPressed: () {
+                      setState(() {
+                        viewNewPassword = !viewNewPassword;
+                      });
+                    },
+                  ),
+                  helperText: _newPassword,
                 ),
-                obscureText: true,
+                obscureText: !viewNewPassword,
                 maxLines: 1,
               ),
             ),
@@ -103,14 +164,29 @@ class _CreateNewWalletScreenState extends State<CreateNewWalletScreen> {
                 bottom: 40,
               ),
               child: InputField(
-                controller: _newPasswordController,
-                decoration: const InputDecoration(
-                  labelText: 'New Password',
+                controller: _confirmPasswordController,
+                decoration: InputDecoration(
+                  labelText: 'Confirm Password',
                   hintText: '',
-                  suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                  helperText: 'Must be at least 8 characters',
+                  suffixIcon: IconButton(
+                    icon: Icon(viewConfirmPassword
+                        ? Icons.remove_red_eye_outlined
+                        : Icons.visibility_off_outlined),
+                    onPressed: () {
+                      setState(() {
+                        viewConfirmPassword = !viewConfirmPassword;
+                      });
+                    },
+                  ),
+                  helperText: 'Password should be at least 8 characters',
+                  errorText: (_newPasswordController.text.isNotEmpty &&
+                          _confirmPasswordController.text.isNotEmpty &&
+                          _newPasswordController.text !=
+                              _confirmPasswordController.text)
+                      ? 'Your passwords must match. Please try again.'
+                      : null,
                 ),
-                obscureText: true,
+                obscureText: !viewConfirmPassword,
                 maxLines: 1,
               ),
             ),
@@ -192,7 +268,7 @@ class _CreateNewWalletScreenState extends State<CreateNewWalletScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _isButtonDisabled
+      floatingActionButton: _isButtonDisabled || !isChecked
           ? Container(
               padding: const EdgeInsets.only(bottom: 42, left: 24, right: 24),
               child: ElevatedButton(

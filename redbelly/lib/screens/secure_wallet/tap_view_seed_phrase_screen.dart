@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:redbelly/screens/secure_wallet/confirm_seed_phrase_screen.dart';
+import '/screens/secure_wallet/confirm_seed_phrase_screen.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
 import '../../theme/typography.dart';
@@ -159,26 +159,21 @@ class _TapViewSeedPhraseScreenState extends State<TapViewSeedPhraseScreen> {
                   ),
                 ),
                 if (!viewSeedPhrase)
-                  WillPopScope(
-                    onWillPop: () async {
-                      setState(() {
-                        viewSeedPhrase = !viewSeedPhrase;
-                      });
-                      return false;
-                    },
+                  ClipRect(
                     child: BackdropFilter(
-                      // blendMode: BlendMode.dst,
                       filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
                       child: Padding(
-                        padding:  const EdgeInsets.symmetric(horizontal: 32, vertical: 64),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 64),
                         child: Container(
                           alignment: Alignment.center,
-                          padding: const EdgeInsets.symmetric(horizontal: 24,vertical:105),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 105),
                           decoration: BoxDecoration(
-                            color:  const Color(0x99222531),
+                            color: const Color(0x99222531),
                             border: Border.all(
-                              color:
-                                  primarySwatch.withOpacity(0.05999999865889549),
+                              color: primarySwatch
+                                  .withOpacity(0.05999999865889549),
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -211,8 +206,8 @@ class _TapViewSeedPhraseScreenState extends State<TapViewSeedPhraseScreen> {
                                 style: ButtonStyle(
                                   padding: const MaterialStatePropertyAll(
                                       EdgeInsets.all(16)),
-                                  backgroundColor:
-                                      MaterialStatePropertyAll(surfaceSwatch[21]),
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      surfaceSwatch[21]),
                                   fixedSize: const MaterialStatePropertyAll(
                                       Size(110, 56)),
                                 ),
