@@ -67,7 +67,7 @@ class ProtectYourWalletScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return ManualSecureWalletScreen(showProtectYourWalletPage:false,);
+                          return const ManualSecureWalletScreen(showProtectYourWalletPage:false,);
                         },
                       ),
                     );

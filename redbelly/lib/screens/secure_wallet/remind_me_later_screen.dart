@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/screens/secure_wallet/tap_view_seed_phrase_screen.dart';
 import '/screens/secure_wallet/manual_secure_wallet_screen.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
@@ -111,7 +112,8 @@ class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (BuildContext context) {
-                            return ManualSecureWalletScreen(showProtectYourWalletPage: true);
+                            return const ManualSecureWalletScreen(
+                                showProtectYourWalletPage: true);
                           },
                         ),
                       );
@@ -124,33 +126,51 @@ class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: Gradients.gradient2,
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: ElevatedButton(
-                      style: const ButtonStyle(
-                        fixedSize: MaterialStatePropertyAll(
-                          Size(156, 48),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return ManualSecureWalletScreen(showProtectYourWalletPage: false,);
-                            },
+                  !isChecked
+                      ? ElevatedButton(
+                          style: ButtonStyle(
+                            fixedSize: const MaterialStatePropertyAll(
+                              Size(156, 48),
+                            ),
+                            backgroundColor:
+                                MaterialStatePropertyAll(surfaceSwatch[21]),
                           ),
-                        );
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: const Text('Skip'),
-                      ),
-                    ),
-                  ),
+                          onPressed: null,
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Skip',
+                              style: TextStyle(color: surfaceSwatch[18]),
+                            ),
+                          ),
+                        )
+                      : Container(
+                          decoration: BoxDecoration(
+                            gradient: Gradients.gradient2,
+                            borderRadius: BorderRadius.circular(80),
+                          ),
+                          child: ElevatedButton(
+                            style: const ButtonStyle(
+                              fixedSize: MaterialStatePropertyAll(
+                                Size(156, 48),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return const TapViewSeedPhraseScreen();
+                                  },
+                                ),
+                              );
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: const Text('Skip'),
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ),

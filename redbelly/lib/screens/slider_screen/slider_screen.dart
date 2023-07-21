@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../theme/color_coding.dart';
-import '../theme/gradient.dart';
+import '../../theme/color_coding.dart';
+import '../../theme/gradient.dart';
 import '/screens/wallet_setup_screen.dart';
-import '../widgets/slider_sub_screen.dart';
+import 'widgets/slider_sub_screen.dart';
 
 class SliderScreen extends StatefulWidget {
   const SliderScreen({super.key});
@@ -90,7 +90,7 @@ class _SliderScreenState extends State<SliderScreen> {
               },
               child: Container(
                 alignment: Alignment.center,
-                child: const Text('Get Start'),
+                child: const Text('Get Started'),
               ),
             ),
           ),

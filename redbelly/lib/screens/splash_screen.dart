@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../screens/slider_screen.dart';
+import 'slider_screen/slider_screen.dart';
 import '../theme/gradient.dart';
 
 class SplashScreen extends StatefulWidget {

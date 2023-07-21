@@ -17,6 +17,9 @@ InputDecorationTheme inputDecorationTheme() {
     helperStyle: textTheme.bodySmall!.copyWith(
       color: surfaceSwatch[12],
     ),
+    errorStyle: textTheme.bodySmall!.copyWith(
+      color: errorSwatch[4],
+    ),
     suffixIconColor: primarySwatch,
     border: InputBorder.none,
     constraints: const BoxConstraints(

@@ -4,6 +4,8 @@ import '../theme/input_decoration_theme.dart';
 
 class InputField extends StatelessWidget {
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final Function(String)? onChanged;
   final InputDecoration? decoration;
   final TextStyle? style;
   final bool obscureText;
@@ -11,12 +13,14 @@ class InputField extends StatelessWidget {
   final int? maxLines;
   final String? labelText;
   final String? hintText;
-  final String? helperText;
+  final Widget? helperText;
   final String? errorText;
-  final Icon? suffixIcon;
+  final IconButton? suffixIcon;
 
   const InputField({
     this.controller,
+    this.validator,
+    this.onChanged,
     this.decoration,
     this.style,
     this.obscureText = false,
@@ -37,15 +41,17 @@ class InputField extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 12,bottom: 12),
+          padding: const EdgeInsets.only(top: 12, bottom: 12),
           decoration: BoxDecoration(
             border: Border.all(
               color: surfaceSwatch[22]!,
             ),
             borderRadius: BorderRadius.circular(16),
           ),
-          child: TextField(
+          child: TextFormField(
             controller: controller,
+            validator: validator,
+            onChanged: onChanged,
             decoration: InputDecoration(
               contentPadding: inputDecorationTheme().contentPadding,
               labelText: decoration?.labelText,
@@ -57,7 +63,9 @@ class InputField extends StatelessWidget {
               suffixIcon: decoration?.suffixIcon,
               suffixIconColor: inputDecorationTheme().suffixIconColor,
               border: inputDecorationTheme().border,
-              constraints: maxLines != null ? inputDecorationTheme().constraints : const BoxConstraints(maxHeight: double.infinity),
+              constraints: maxLines != null
+                  ? inputDecorationTheme().constraints
+                  : const BoxConstraints(),
             ),
             obscureText: obscureText,
             obscuringCharacter: '*',
@@ -72,7 +80,21 @@ class InputField extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 16),
                     child: Text(
                       decoration?.helperText as String,
-                      style: Theme.of(context).inputDecorationTheme.helperStyle,
+                      style: inputDecorationTheme().helperStyle,
+                    ),
+                  ),
+                ],
+              )
+            : Container(),
+        decoration?.errorText != null
+            ? Column(
+                children: [
+                  const SizedBox(height: 4),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text(
+                      decoration?.errorText as String,
+                      style: inputDecorationTheme().errorStyle,
                     ),
                   ),
                 ],

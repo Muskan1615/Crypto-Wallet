@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/gradient.dart';
+import '../../../theme/gradient.dart';
 
 class SliderSubScreen extends StatelessWidget {
   final Shader? Function(Rect, Gradient)? shader;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../screens/import_from_seed_screen.dart';
+import 'secure_wallet/create_new_wallet_screen.dart';
+import 'import_from_seed/import_from_seed_screen.dart';
 import '../theme/color_coding.dart';
 import '../theme/gradient.dart';
 
@@ -95,7 +96,7 @@ class WalletSetupScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (BuildContext context) {
-                            return const WalletSetupScreen();
+                            return const CreateNewWalletScreen();
                           },
                         ),
                       );

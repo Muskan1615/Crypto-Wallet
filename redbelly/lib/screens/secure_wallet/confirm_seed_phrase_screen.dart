@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redbelly/screens/secure_wallet/manual_secure_wallet_screen.dart';
-import 'package:redbelly/screens/secure_wallet/success_wallet_screen.dart';
-import 'package:redbelly/screens/secure_wallet/tap_view_seed_phrase_screen.dart';
-
+import '/screens/secure_wallet/success_wallet_screen.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
 import '../../theme/typography.dart';
@@ -25,6 +22,7 @@ class _ConfirmSeedPhraseScreenState extends State<ConfirmSeedPhraseScreen> {
     "exit",
   ];
   bool confirmSeedPhrase = false;
+  String selectedPhrase = '';
   int currentStep = 1;
 
   @override
@@ -89,10 +87,10 @@ class _ConfirmSeedPhraseScreenState extends State<ConfirmSeedPhraseScreen> {
                       ),
                       child: Text(
                         currentStep == 1
-                            ? "3. ${phrases1[2]}"
+                            ? "3. $selectedPhrase"
                             : currentStep == 2
-                                ? "7. ${phrases1[0]}"
-                                : "12. ${phrases1[5]}",
+                                ? "7. $selectedPhrase"
+                                : "12. $selectedPhrase",
                         style: textTheme.displayMedium!.copyWith(
                           fontSize: 40,
                           height: 1.5,
@@ -192,6 +190,7 @@ class _ConfirmSeedPhraseScreenState extends State<ConfirmSeedPhraseScreen> {
                     return GestureDetector(
                       onTap: () {
                         setState(() {
+                          selectedPhrase = phrase;
                           confirmSeedPhrase = true;
                         });
                       },
@@ -227,25 +226,40 @@ class _ConfirmSeedPhraseScreenState extends State<ConfirmSeedPhraseScreen> {
                   borderRadius: BorderRadius.circular(80),
                 ),
                 child: ElevatedButton(
-                  onPressed: currentStep < 3
-                      ? () {
-                          setState(() {
-                            confirmSeedPhrase = false;
-                            currentStep++;
-                          });
-                        }
-                      : currentStep == 3
-                          ? () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                    return const SuccessWalletScreen();
-                                  },
-                                ),
-                              );
-                            }
-                          : null,
+                  onPressed: () {
+                    if (currentStep == 1 && selectedPhrase == phrases1[2]) {
+                      setState(() {
+                        confirmSeedPhrase = false;
+                        currentStep++;
+                      });
+                    } else if (currentStep == 2 &&
+                        selectedPhrase == phrases1[5]) {
+                      setState(() {
+                        confirmSeedPhrase = false;
+                        currentStep++;
+                      });
+                    } else if (currentStep == 3 &&
+                        selectedPhrase == phrases1[0]) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return const SuccessWalletScreen();
+                          },
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text('Incorrect seed phrase selected.'),
+                          backgroundColor: surfaceSwatch[22],
+                          duration: const Duration(
+                            seconds: 2,
+                          ),
+                        ),
+                      );
+                    }
+                  },
                   child: Container(
                     alignment: Alignment.center,
                     child: const Text('Next'),

@@ -24,11 +24,15 @@ class _CreateSecureWalletScreenState extends State<CreateSecureWalletScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: showRemindMeLaterPage ? const Color(0x99222531) : null,
+        backgroundColor: (showRemindMeLaterPage || showIntroSeedPhrasePage)
+            ? const Color(0x99222531)
+            : null,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: showRemindMeLaterPage ? const Color(0x99222531) : null,
+            color: (showRemindMeLaterPage || showIntroSeedPhrasePage)
+                ? const Color(0x99222531)
+                : null,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -92,14 +96,9 @@ class _CreateSecureWalletScreenState extends State<CreateSecureWalletScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                    return const IntroSeedPhraseScreen();
-                                  },
-                                ),
-                              );
+                              setState(() {
+                                showIntroSeedPhrasePage = true;
+                              });
                             },
                         ),
                         TextSpan(
@@ -162,42 +161,42 @@ class _CreateSecureWalletScreenState extends State<CreateSecureWalletScreen> {
                 ),
               ),
             ),
-          // if (showIntroSeedPhrasePage)
-          //   WillPopScope(
-          //     onWillPop: () async {
-          //       setState(() {
-          //         showIntroSeedPhrasePage = false;
-          //       });
-          //       return false;
-          //     },
-          //     child: BackdropFilter(
-          //       filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-          //       child: Stack(
-          //         children: [
-          //           GestureDetector(
-          //             onTap: () {
-          //               setState(() {
-          //                 showIntroSeedPhrasePage = false;
-          //               });
-          //             },
-          //             child: const Stack(
-          //               children: [
-          //                 ModalBarrier(
-          //                   color: Color(0x99222531),
-          //                   dismissible: true,
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //           const IntroSeedPhraseScreen(),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
+          if (showIntroSeedPhrasePage)
+            WillPopScope(
+              onWillPop: () async {
+                setState(() {
+                  showIntroSeedPhrasePage = false;
+                });
+                return false;
+              },
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+                child: Stack(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          showIntroSeedPhrasePage = false;
+                        });
+                      },
+                      child: const Stack(
+                        children: [
+                          ModalBarrier(
+                            color: Color(0x99222531),
+                            dismissible: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const IntroSeedPhraseScreen(),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: !showRemindMeLaterPage
+      floatingActionButton: !(showRemindMeLaterPage || showIntroSeedPhrasePage)
           ? Align(
               alignment: Alignment.bottomCenter,
               child: Column(

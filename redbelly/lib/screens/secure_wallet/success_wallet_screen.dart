@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redbelly/screens/create_new_wallet_screen.dart';
-import '/screens/secure_wallet/manual_secure_wallet_screen.dart';
-import '../../theme/color_coding.dart';
+import 'create_new_wallet_screen.dart';
 import '../../theme/gradient.dart';
 import '../../theme/typography.dart';
 
@@ -26,9 +24,7 @@ class _SuccessWalletScreenState extends State<SuccessWalletScreen> {
             Icons.arrow_back_ios,
             color: showRemindMeLaterPage ? const Color(0x99222531) : null,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: null,
           padding: const EdgeInsets.only(left: 16.0),
         ),
       ),
