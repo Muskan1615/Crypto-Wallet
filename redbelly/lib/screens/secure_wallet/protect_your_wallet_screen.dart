@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '/screens/secure_wallet/manual_secure_wallet_screen.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
-import '../../theme/typography.dart';
+import '../../theme/text_theme.dart';
 
 class ProtectYourWalletScreen extends StatelessWidget {
   const ProtectYourWalletScreen({super.key});
@@ -67,7 +67,7 @@ class ProtectYourWalletScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const ManualSecureWalletScreen(showProtectYourWalletPage:false,);
+                          return const ManualSecureWalletScreen(showProtectYourWalletPage:false);
                         },
                       ),
                     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '/screens/secure_wallet/success_wallet_screen.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
-import '../../theme/typography.dart';
+import '../../theme/text_theme.dart';
 
 class ConfirmSeedPhraseScreen extends StatefulWidget {
   const ConfirmSeedPhraseScreen({super.key});

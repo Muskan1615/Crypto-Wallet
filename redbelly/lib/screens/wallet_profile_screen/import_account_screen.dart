@@ -1,90 +1,66 @@
 import 'package:flutter/material.dart';
-import '/screens/secure_wallet/tap_view_seed_phrase_screen.dart';
-import '/screens/secure_wallet/manual_secure_wallet_screen.dart';
+import '/widgets/qr_scanner.dart';
+import '/widgets/input_field.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
 import '../../theme/text_theme.dart';
 
-class RemindMeLaterScreen extends StatefulWidget {
-  const RemindMeLaterScreen({super.key});
+class ImportAccountScreen extends StatefulWidget {
+  const ImportAccountScreen({super.key});
 
   @override
-  State<RemindMeLaterScreen> createState() => _RemindMeLaterScreenState();
+  State<ImportAccountScreen> createState() => _ImportAccountScreenState();
 }
 
-class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
-  bool isChecked = false;
+class _ImportAccountScreenState extends State<ImportAccountScreen> {
+  final TextEditingController _privateKeyController = TextEditingController();
+
+  bool _isButtonDisabled = true;
+  @override
+  void initState() {
+    super.initState();
+    _privateKeyController.addListener(_validateFields);
+  }
+
+  void _validateFields() {
+    final privateKey = _privateKeyController.text;
+
+    setState(() {
+      _isButtonDisabled = privateKey.isEmpty;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        height: 280,
+        height: 490,
         color: surfaceSwatch[24],
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
-              child: Text(
-                'Skip Account Security?',
-                style: textTheme.bodyLarge!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  wordSpacing: 2,
-                ),
-              ),
-            ),
-            Padding(
               padding: const EdgeInsets.only(
-                right: 32,
-                left: 32,
-                top: 24,
-              ),
+                  left: 24, right: 24, top: 10, bottom: 30),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.only(top: 4),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          isChecked = !isChecked;
-                        });
-                      },
-                      child: Container(
-                        width: 24.0,
-                        height: 24.0,
-                        decoration: BoxDecoration(
-                          color:
-                              isChecked ? primarySwatch[5] : Colors.transparent,
-                          border: Border.all(color: primarySwatch[5]!),
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: isChecked
-                            ? Checkbox(
-                                value: isChecked,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isChecked = value!;
-                                  });
-                                },
-                              )
-                            : const SizedBox(),
-                      ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 8,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
                   Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        text:
-                            'I understand that if I lose my seed phrase, I will not be able to access my wallet.',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontSize: 18,
-                              height: 1.5,
-                            ),
+                    child: Center(
+                      child: Text(
+                        "Import Account",
+                        style: textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.w600,
+                          wordSpacing: 2,
+                        ),
                       ),
                     ),
                   ),
@@ -92,9 +68,51 @@ class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+              child: Text(
+                "Imported accounts are viewable in your wallet but are not recoverable with your DeGe seed phrase.",
+                style: textTheme.bodyMedium!.copyWith(
+                  wordSpacing: 2,
+                  height: 1.5,
+                  color: surfaceSwatch[4],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Text(
+                "Learn more about imported accounts here.",
+                style: textTheme.bodyMedium!.copyWith(
+                  wordSpacing: 2,
+                  height: 1.5,
+                  color: surfaceSwatch[4],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32,
+              ),
+              child: Text(
+                "Paste your private key string",
+                style: textTheme.titleMedium!.copyWith(
+                  wordSpacing: 2,
+                  height: 3,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+              child: InputField(
+                controller: _privateKeyController,
+                decoration: const InputDecoration(hintText: ''),
+                maxLines: null,
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.only(
-                right: 60,
-                left: 60,
+                right: 32,
+                left: 32,
                 top: 50,
                 bottom: 42,
               ),
@@ -104,7 +122,7 @@ class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
                   ElevatedButton(
                     style: const ButtonStyle(
                       fixedSize: MaterialStatePropertyAll(
-                        Size(156, 48),
+                        Size(183, 48),
                       ),
                     ),
                     onPressed: () {
@@ -112,8 +130,7 @@ class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (BuildContext context) {
-                            return const ManualSecureWalletScreen(
-                                showProtectYourWalletPage: true);
+                            return const QRScanner();
                           },
                         ),
                       );
@@ -121,16 +138,16 @@ class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        'Secure',
+                        'Scan a QR code',
                         style: TextStyle(color: secondarySwatch[5]),
                       ),
                     ),
                   ),
-                  !isChecked
+                  _isButtonDisabled
                       ? ElevatedButton(
                           style: ButtonStyle(
                             fixedSize: const MaterialStatePropertyAll(
-                              Size(156, 48),
+                              Size(183, 48),
                             ),
                             backgroundColor:
                                 MaterialStatePropertyAll(surfaceSwatch[21]),
@@ -139,7 +156,7 @@ class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
                           child: Container(
                             alignment: Alignment.center,
                             child: Text(
-                              'Skip',
+                              'Import',
                               style: TextStyle(color: surfaceSwatch[18]),
                             ),
                           ),
@@ -152,7 +169,7 @@ class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
                           child: ElevatedButton(
                             style: const ButtonStyle(
                               fixedSize: MaterialStatePropertyAll(
-                                Size(156, 48),
+                                Size(183, 48),
                               ),
                             ),
                             onPressed: () {
@@ -160,14 +177,14 @@ class _RemindMeLaterScreenState extends State<RemindMeLaterScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                    return const TapViewSeedPhraseScreen();
+                                    return const Scaffold();
                                   },
                                 ),
                               );
                             },
                             child: Container(
                               alignment: Alignment.center,
-                              child: const Text('Skip'),
+                              child: const Text('Import'),
                             ),
                           ),
                         ),

@@ -4,11 +4,11 @@ import 'checkbox_theme.dart';
 import 'button_theme.dart';
 import '../theme/color_coding.dart';
 import 'color_scheme.dart';
-import '../theme/typography.dart';
+import 'text_theme.dart';
 import 'app_bar_theme.dart';
 import 'icon_theme.dart';
 
-final ThemeData theme = ThemeData(
+ThemeData theme = ThemeData(
   scaffoldBackgroundColor: surfaceSwatch[24],
   appBarTheme: appBarTheme(textTheme),
   textTheme: textTheme,
