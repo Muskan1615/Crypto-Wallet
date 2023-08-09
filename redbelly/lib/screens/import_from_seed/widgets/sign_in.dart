@@ -27,42 +27,30 @@ class _SignInState extends State<SignIn> {
                   fontWeight: FontWeight.w600,
                 ),
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                if (!_isButtonClicked) {
-                  _isButtonClicked = true;
-                  if (!_isFingerprintEnabled) {
-                    _authenticateWithBiometrics();
-                  }
-                }
-              });
-            },
-            child: Container(
-              width: 68,
-              height: 32,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(17),
-                color: _isButtonClicked ? primarySwatch[5] : surfaceSwatch[18],
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  AnimatedPositioned(
-                    duration: const Duration(milliseconds: 300),
-                    left: _isButtonClicked ? 40 : 5,
-                    child: Container(
-                      width: 24,
-                      height: 24,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _isButtonClicked
-                            ? primarySwatch
-                            : surfaceSwatch[22],
-                      ),
-                    ),
-                  ),
-                ],
+          Container(
+            width: 68,
+            height: 37,
+            decoration: BoxDecoration(
+              color: _isButtonClicked ? primarySwatch[5] : surfaceSwatch[18],
+              borderRadius: BorderRadius.circular(32),
+            ),
+            child: Transform.scale(
+              scale: 1.4,
+              child: Switch(
+                value: _isButtonClicked,
+                onChanged: (value) {
+                  setState(() {
+                    if (!_isButtonClicked) {
+                      _isButtonClicked = true;
+                      if (!_isFingerprintEnabled) {
+                        _authenticateWithBiometrics();
+                      }
+                    }
+                  });
+                },
+                activeTrackColor: primarySwatch[5],
+                inactiveThumbColor: surfaceSwatch[22],
+                inactiveTrackColor: surfaceSwatch[18],
               ),
             ),
           ),
@@ -78,7 +66,7 @@ class _SignInState extends State<SignIn> {
 
     setState(() {
       _isFingerprintEnabled = isAuthenticated;
-       if (!_isFingerprintEnabled) {
+      if (!_isFingerprintEnabled) {
         _isButtonClicked = false;
       }
     });

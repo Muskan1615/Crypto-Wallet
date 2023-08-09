@@ -102,8 +102,8 @@ class _SliderScreenState extends State<SliderScreen> {
   Widget buildPageIndicator(int pageIndex) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
-      width: pageIndex == _currentPage ? 8 : 8,
-      height: pageIndex == _currentPage ? 8 : 8,
+      width: 8,
+      height: 8,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: pageIndex == _currentPage ? primarySwatch[5] : surfaceSwatch[18],

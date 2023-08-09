@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
-import '../../theme/typography.dart';
+import '../../theme/text_theme.dart';
 import 'create_secure_wallet_screen.dart';
 
 class IntroSeedPhraseScreen extends StatelessWidget {

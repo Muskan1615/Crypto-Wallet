@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../widgets/qr_scanner.dart';
 import '../../widgets/input_field.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
-import '../secure_wallet/success_wallet_screen.dart';
+import '../wallet_profile_screen/wallet_home_screen.dart';
 import 'widgets/sign_in.dart';
 import 'widgets/terms_conditions.dart';
 
@@ -18,13 +19,12 @@ class _ImportFromSeedScreenState extends State<ImportFromSeedScreen> {
   final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
- 
+
   bool _isButtonDisabled = true;
   bool viewSeedPhrase = false;
   bool viewNewPassword = false;
   bool viewConfirmPassword = false;
   String? _newPassword;
-
 
   bool validateStructure(String value) {
     String pattern = r'^[A-Za-z0-9!@#\$&*~]{8,}$';
@@ -33,16 +33,9 @@ class _ImportFromSeedScreenState extends State<ImportFromSeedScreen> {
   }
 
   validate() {
-    if (_newPasswordController.text.isEmpty) {
+    if (_newPasswordController.text.isEmpty && _newPasswordController.text.length < 8) {
       setState(() {
         _newPassword = 'Must be at least 8 characters';
-      });
-      return;
-    }
-
-    if (_newPasswordController.text.length < 8) {
-      setState(() {
-        _newPassword = 'Password should be at least 8 characters';
       });
       return;
     }
@@ -108,7 +101,6 @@ class _ImportFromSeedScreenState extends State<ImportFromSeedScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Stack(
-                alignment: Alignment.topRight,
                 children: [
                   Padding(
                     padding:
@@ -133,22 +125,28 @@ class _ImportFromSeedScreenState extends State<ImportFromSeedScreen> {
                     ),
                   ),
                   Positioned(
-                    top: 40,
+                    top: 65,
+                    right: 20,
                     child: Stack(
                       children: [
-                        IconButton(
-                          padding: const EdgeInsets.all(16),
-                          color: primarySwatch[5],
-                          icon: const Icon(Icons.crop_free),
-                          onPressed: () {},
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return const QRScanner();
+                                },
+                              ),
+                            );
+                          },
+                          child: Image.asset(
+                            'images/scanner.png',
+                            color: primarySwatch[5],
+                            width: 24,
+                            height: 24,
+                          ),
                         ),
-                        IconButton(
-                          padding: const EdgeInsets.all(16),
-                          color: primarySwatch[5],
-                          icon: const Icon(Icons.remove),
-                          onPressed: () {},
-                        ),
-                       
                       ],
                     ),
                   ),
@@ -244,7 +242,7 @@ class _ImportFromSeedScreenState extends State<ImportFromSeedScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const SuccessWalletScreen();
+                          return const WalletHomeScreen();
                         },
                       ),
                     );

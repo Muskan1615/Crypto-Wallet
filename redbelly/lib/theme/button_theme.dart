@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'typography.dart';
+import 'text_theme.dart';
 
 ElevatedButtonThemeData elevatedButtonTheme({
   VoidCallback? onPressed,
@@ -22,6 +22,7 @@ ElevatedButtonThemeData elevatedButtonTheme({
         ),
       ),
       splashFactory: NoSplash.splashFactory,
+      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
       textStyle: MaterialStateProperty.all(
         textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w700),
       ),

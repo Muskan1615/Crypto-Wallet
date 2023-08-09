@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/color_coding.dart';
-import 'typography.dart';
+import 'text_theme.dart';
 
 InputDecorationTheme inputDecorationTheme() {
   return InputDecorationTheme(

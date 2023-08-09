@@ -6,7 +6,7 @@ import '/screens/secure_wallet/intro_seed_phrase_screen.dart';
 import '/screens/secure_wallet/remind_me_later_screen.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
-import '../../theme/typography.dart';
+import '../../theme/text_theme.dart';
 
 class CreateSecureWalletScreen extends StatefulWidget {
   const CreateSecureWalletScreen({super.key});
@@ -206,8 +206,6 @@ class _CreateSecureWalletScreenState extends State<CreateSecureWalletScreen> {
                   Container(
                     padding: const EdgeInsets.all(32),
                     child: ElevatedButton(
-                      style: const ButtonStyle(
-                          splashFactory: NoSplash.splashFactory),
                       onPressed: () {
                         setState(() {
                           showRemindMeLaterPage = true;
@@ -236,7 +234,7 @@ class _CreateSecureWalletScreenState extends State<CreateSecureWalletScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return ManualSecureWalletScreen(
+                                return const ManualSecureWalletScreen(
                                   showProtectYourWalletPage: false,
                                 );
                               },

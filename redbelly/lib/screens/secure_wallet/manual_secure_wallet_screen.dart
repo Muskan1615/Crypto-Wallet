@@ -5,7 +5,7 @@ import '/screens/secure_wallet/tap_view_seed_phrase_screen.dart';
 import '/screens/secure_wallet/protect_your_wallet_screen.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
-import '../../theme/typography.dart';
+import '../../theme/text_theme.dart';
 
 class ManualSecureWalletScreen extends StatefulWidget {
   final bool? showProtectYourWalletPage;

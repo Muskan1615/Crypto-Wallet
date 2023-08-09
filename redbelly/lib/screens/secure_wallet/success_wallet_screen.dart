@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'create_new_wallet_screen.dart';
 import '../../theme/gradient.dart';
-import '../../theme/typography.dart';
+import '../../theme/text_theme.dart';
 
 class SuccessWalletScreen extends StatefulWidget {
   const SuccessWalletScreen({super.key});

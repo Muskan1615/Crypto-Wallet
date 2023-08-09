@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/screens/secure_wallet/confirm_seed_phrase_screen.dart';
 import '../../theme/color_coding.dart';
 import '../../theme/gradient.dart';
-import '../../theme/typography.dart';
+import '../../theme/text_theme.dart';
 
 class TapViewSeedPhraseScreen extends StatefulWidget {
   const TapViewSeedPhraseScreen({super.key});

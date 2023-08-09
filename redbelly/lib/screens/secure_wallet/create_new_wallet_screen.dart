@@ -4,7 +4,7 @@ import '../../theme/color_coding.dart';
 import '../../widgets/input_field.dart';
 import '../import_from_seed/widgets/sign_in.dart';
 import '../../theme/gradient.dart';
-import '../../theme/typography.dart';
+import '../../theme/text_theme.dart';
 import 'create_secure_wallet_screen.dart';
 
 class CreateNewWalletScreen extends StatefulWidget {
